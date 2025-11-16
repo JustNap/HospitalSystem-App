@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Appointment Details - Hospital Information System</title>
+    <link rel="stylesheet" href="/css/admin.css"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="header">
+    <div class="logo">👤 Global Hospital</div>
+    <a href="/logout" class="logout">🔒 Logout</a>
+</header>
+
+<div class="container">
+    <aside class="sidebar">
+        <ul>
+            <li><a href="/admin/dashboard">Dashboard</a></li>
+            <li><a href="/admin/doctors-list">Doctor List</a></li>
+            <li><a href="/admin/patients-list">Patient List</a></li>
+            <li class="active"><a href="/admin/appointment-doctors">Manage Appointment Doctor</a></li>
+            <li><a href="/admin/appointments">Appointment Details</a></li>
+            <li><a href="/admin/doctors">Add Doctor</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <h2>WELCOME ADMIN</h2>
+
+        <div class="form-section-container">
+            <h3>Buat Jadwal Baru</h3>
+            <form class="schedule-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="doctor-select">Pilih Dokter:</label>
+                        <select id="doctor-select" required>
+                            <option value="">-- Pilih Dokter --</option>
+                            <option value="ashok">Dr. Ashok</option>
+                            <option value="arun">Dr. Arun</option>
+                            <option value="dinesh">Dr. Dinesh</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="schedule-date">Tanggal:</label>
+                        <input type="date" id="schedule-date" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="start-time">Waktu Mulai:</label>
+                        <input type="time" id="start-time" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="end-time">Waktu Selesai:</label>
+                        <input type="time" id="end-time" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="slot-count">Jumlah Slot (misal: 10):</label>
+                        <input type="number" id="slot-count" min="1" value="10" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-button">Buat Jadwal</button>
+            </form>
+        </div>
+
+        <h3 class="schedule-list-title">Daftar Jadwal Dokter yang Tersedia</h3>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">Doctor Name</th>
+                        <th style="width: 15%;">Tanggal</th>
+                        <th style="width: 15%;">Waktu Mulai</th>
+                        <th style="width: 15%;">Waktu Selesai</th>
+                        <th style="width: 10%;">Slots</th>
+                        <th style="width: 15%;">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Dr. Ashok</td>
+                        <td>2024-10-25</td>
+                        <td>09:00 AM</td>
+                        <td>12:00 PM</td>
+                        <td>10</td>
+                        <td><button class="action-button delete-btn">Hapus</button></td>
+                    </tr>
+                    <tr>
+                        <td>Dr. Arun</td>
+                        <td>2024-10-26</td>
+                        <td>14:00 PM</td>
+                        <td>17:00 PM</td>
+                        <td>8</td>
+                        <td><button class="action-button delete-btn">Hapus</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+
+</body>
+</html>
