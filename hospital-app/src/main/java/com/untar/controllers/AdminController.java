@@ -4,6 +4,7 @@ import static spark.Spark.*;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
+import com.untar.repository.AppointmentScheduleRepository;
 import com.untar.repository.DoctorRepository;
 import com.untar.repository.PatientRepository;
 
@@ -48,8 +49,62 @@ public class AdminController {
         });
 
         get("/admin/appointment-doctors", (req, res) -> {
-            return renderHTML("/templates/admin/appointment-doctors.html");
+            var schedules = AppointmentScheduleRepository.getAll();
+            var doctors = DoctorRepository.getAll();
+
+            StringBuilder options = new StringBuilder();
+            for (var d : doctors) {
+                options.append("<option value='")
+                    .append(d.getId())
+                    .append("'>Dr. ")
+                    .append(d.getNama())
+                    .append(" (")
+                    .append(d.getSpesialis())
+                    .append(")</option>");
+            }
+
+            StringBuilder rows = new StringBuilder();
+            for (var s : schedules) {
+                rows.append("<tr>")
+                    .append("<td>").append(s.getNama_dokter()).append("</td>")
+                    .append("<td>").append(s.getTanggal()).append("</td>")
+                    .append("<td>").append(s.getWaktu_mulai()).append("</td>")
+                    .append("<td>").append(s.getWaktu_selesai()).append("</td>")
+                    .append("<td>").append(s.getSlot_total()).append("</td>")
+                    .append("<td>")
+                        .append("<form action='/admin/schedule/delete' method='post' onsubmit='return confirm(\"Yakin hapus?\")'>")
+                            .append("<input type='hidden' name='id' value='").append(s.getId()).append("'>")
+                            .append("<button type='submit'>Hapus</button>")
+                        .append("</form>")
+                    .append("</td>")
+                .append("</tr>");
+            }
+
+            return renderHTML("/templates/admin/appointment-doctors.html")
+                    .replace("{{doctorOptions}}", options.toString())
+                    .replace("{{scheduleRows}}", rows.toString());
         });
+
+        post("/admin/appointment-doctors/create", (req, res) -> {
+            int doctorId = Integer.parseInt(req.queryParams("id_doctor"));
+            String tanggal = req.queryParams("tanggal");
+            String mulai = req.queryParams("mulai");
+            String selesai = req.queryParams("selesai");
+            int slot = Integer.parseInt(req.queryParams("slot"));
+
+            AppointmentScheduleRepository.save(doctorId, tanggal, mulai, selesai, slot);
+
+            res.redirect("/admin/appointment-doctors");
+            return null;
+        });
+
+        post("/admin/schedule/delete", (req, res) -> {
+            int id = Integer.parseInt(req.queryParams("id"));
+            AppointmentScheduleRepository.delete(id);
+            res.redirect("/admin/appointment-doctors");
+            return null;
+        });
+
     }
 
     private static String renderHTML(String path) {
