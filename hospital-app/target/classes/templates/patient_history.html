@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>History Appointment</title>
+    <link rel="stylesheet" href="/css/patient.css">
+</head>
+
+<body>
+<div class="navbar">
+    <h2>Hospital Information System</h2>
+    <a href="/logout" class="logout-btn">Logout</a>
+</div>
+
+<div class="container">
+    <h1>Riwayat Appointment</h1>
+
+    <table class="table">
+        <tr>
+            <th>Dokter</th>
+            <th>Tanggal</th>
+            <th>Jam</th>
+            <th>Status</th>
+            <th>Detail</th>
+        </tr>
+
+        {{#appointments}}
+        <tr>
+            <td>{{nama_dokter}}</td>
+            <td>{{date}}</td>
+            <td>{{time}}</td>
+            <td>{{status}}</td>
+            <td><a href="/patient/diagnosis/{{id}}" class="btn-small">Lihat</a></td>
+        </tr>
+        {{/appointments}}
+    </table>
+</div>
+
+</body>
+</html>

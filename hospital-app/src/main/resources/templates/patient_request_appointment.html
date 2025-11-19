@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Request Konsultasi</title>
+    <link rel="stylesheet" href="/css/patient.css">
+</head>
+
+<body>
+<div class="navbar">
+    <h2>Hospital Information System</h2>
+    <a href="/logout" class="logout-btn">Logout</a>
+</div>
+
+<div class="container">
+    <h1>Request Konsultasi Dokter</h1>
+
+    <form action="/patient/request/submit" method="post" class="form-box">
+
+        <label for="doctor">Pilih Dokter</label>
+        <select name="doctor_id" id="doctor">
+            <!-- Spark/Controller akan mengisi list dokter -->
+            {{#dokter}}
+            <option value="{{id}}">{{nama}} - {{spesialis}}</option>
+            {{/dokter}}
+        </select>
+
+        <label for="date">Tanggal</label>
+        <input type="date" name="date" required>
+
+        <label for="time">Jam</label>
+        <input type="time" name="time" required>
+
+        <button type="submit" class="submit-btn">Kirim Request</button>
+    </form>
+</div>
+
+</body>
+</html>
