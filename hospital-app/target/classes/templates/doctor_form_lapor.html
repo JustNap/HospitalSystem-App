@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Input Laporan Manual</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/dokter.css">
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-dark bg-primary mb-4">
+    <div class="container">
+        <span class="navbar-brand">Hospital App - Laporan Manual</span>
+        <span class="text-white" th:text="'Halo, ' + ${doctorName}"></span>
+    </div>
+</nav>
+
+<div class="container pb-5">
+
+    <!-- Tombol Kembali ke Menu Lapor -->
+    <a href="/doctor/lapor" class="btn btn-outline-secondary mb-3">← Kembali ke Riwayat</a>
+
+    <!-- Alert Sukses -->
+    <div th:if="${showSuccess}" class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Berhasil!</strong> Data laporan manual tersimpan.
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <div class="row justify-content-center">
+        
+        <!-- FORMULIR INPUT (Khusus Manual) -->
+        <div class="col-md-5 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    🖊️ Form Input Laporan Baru
+                </div>
+                <div class="card-body">
+                    <!-- Action langsung ke submit-riwayat -->
+                    <form method="post" action="/doctor/submit-riwayat">
+
+                        <!-- ID 0 Menandakan Manual -->
+                        <input type="hidden" name="appointmentId" value="0">
+
+                        <div class="mb-2">
+                            <label class="form-label fw-bold small">Nama Pasien</label>
+                            <input type="text" name="patientName" class="form-control" 
+                                   placeholder="Ketik nama pasien..." required>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6 mb-2">
+                                <label class="form-label fw-bold small">Umur</label>
+                                <div class="input-group">
+                                    <input type="number" name="patientAge" class="form-control" required>
+                                    <span class="input-group-text">Thn</span>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <label class="form-label fw-bold small">Gender</label>
+                                <select name="gender" class="form-select" required>
+                                    <option value="Laki-laki">Laki-laki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label fw-bold small">Diagnosa</label>
+                            <input type="text" name="diagnosis" class="form-control" required>
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label fw-bold small">Tanggal</label>
+                            <input type="date" name="date" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold small">Resep / Catatan</label>
+                            <textarea name="prescription" rows="3" class="form-control"></textarea>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Simpan Laporan</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- TABEL RIWAYAT (Khusus Data Manual) -->
+        <div class="col-md-7">
+            <div class="card shadow-sm border-warning">
+                <div class="card-header bg-warning text-dark fw-bold">
+                    📂 Data Laporan Manual (Tabel Riwayat)
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover mb-0 small">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Tanggal</th>
+                                    <th>Pasien</th>
+                                    <th>Diagnosa</th>
+                                    <th>Resep</th>
+                                    <th class="text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="h : ${historyList}">
+                                    <td th:text="${h.date}" class="text-nowrap"></td>
+                                    <td>
+                                        <span class="fw-bold" th:text="${h.patientName}"></span><br>
+                                        <span class="text-muted" th:text="${h.gender} + ', ' + ${h.patientAge} + ' Thn'"></span>
+                                    </td>
+                                    <td><span class="badge bg-success" th:text="${h.diagnosis}"></span></td>
+                                    <td th:text="${h.prescription}"></td>
+                                    
+                                    <!-- Tombol Hapus (Route: delete-diagnosis) -->
+                                    <td class="text-center">
+                                        <form method="post" action="/doctor/delete-diagnosis"
+                                              onsubmit="return confirm('Hapus data ini?');">
+                                            <input type="hidden" name="id" th:value="${h.id}">
+                                            <button type="submit" class="btn btn-danger btn-sm py-0 px-2">x</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr th:if="${#lists.isEmpty(historyList)}">
+                                    <td colspan="5" class="text-center text-muted py-4">
+                                        Belum ada data manual yang diinput.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

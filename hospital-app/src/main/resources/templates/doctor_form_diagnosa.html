@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulir Diagnosa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/dokter.css">
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-primary mb-4">
+    <div class="container">
+        <span class="navbar-brand">Hospital App - Dokter Panel</span>
+        <span class="text-white" th:text="'Halo, ' + ${doctorName}"></span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <a href="/doctor/jadwal" class="btn btn-outline-secondary mb-3">← Batal</a>
+
+    <div th:if="${showSuccess}" class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Berhasil!</strong> Data diagnosa telah disimpan ke database.
+        <a href="/doctor/lapor" class="alert-link">Lihat di Riwayat</a>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    Formulir Diagnosa Pasien
+                </div>
+
+                <div class="card-body">
+                    <form method="post" action="/doctor/submit-diagnosis">
+
+                        <input type="hidden" name="appointmentId" th:value="${appointment.id}">
+
+                        <div class="mb-3">
+                            <label class="form-label">Nama Pasien</label>
+                            <input type="text" name="patientName" class="form-control bg-light"
+                                   th:value="${appointment.patientName}" readonly>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Umur</label>
+                                <div class="input-group">
+                                    <input type="number" name="patientAge" class="form-control" placeholder="Contoh: 30" required>
+                                    <span class="input-group-text">Tahun</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Jenis Kelamin</label>
+                                <select name="gender" class="form-select" required>
+                                    <option value="" disabled selected>Pilih Jenis Kelamin</option>
+                                    <option value="Laki-laki">Laki-laki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Penyakit / Diagnosa</label>
+                            <input type="text" name="diagnosis" class="form-control"
+                                   placeholder="Contoh: ISPA, Tipes, Demam Berdarah..." required>
+                        </div>
+
+                        <hr>
+
+                        <div class="mb-3">
+                            <label class="form-label">Tanggal Pemeriksaan</label>
+                            <input type="date" name="date" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Catatan / Resep Obat</label>
+                            <textarea name="prescription" rows="4" class="form-control"
+                                      placeholder="Tulis resep obat dan dosis di sini..."></textarea>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">Simpan Data Pasien</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
