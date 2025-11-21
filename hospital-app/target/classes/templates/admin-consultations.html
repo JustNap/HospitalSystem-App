@@ -1,0 +1,26 @@
+<div class="card">
+    <h1>Laporan Hasil Konsultasi</h1>
+    <p>Daftar lengkap hasil konsultasi pasien yang telah diinput oleh dokter.</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Tanggal</th>
+                <th>Nama Dokter</th>
+                <th>Nama Pasien</th>
+                <th>Diagnosis</th>
+                <th>Catatan (Untuk Admin)</th>
+            </tr>
+        </thead>
+        <tbody>
+            #foreach($consultation in $consultations)
+            <tr>
+                <td>$consultation.getConsultation_date()</td>
+                <td>$consultation.getDoctorName()</td>
+                <td>$consultation.getPatientName()</td>
+                <td>$consultation.getDiagnosis()</td>
+                <td>$consultation.getNotes()</td>
+            </tr>
+            #end
+        </tbody>
+    </table>
+</div>
