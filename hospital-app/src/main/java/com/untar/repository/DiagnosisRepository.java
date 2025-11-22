@@ -7,10 +7,6 @@ import java.util.List;
 
 public class DiagnosisRepository {
 
-    // ========================================================================
-    // JALUR 1: TABEL 'DIAGNOSIS'
-    // ========================================================================
-    
     public boolean saveToDiagnosis(DiagnosisDoctor diag) {
         String sql = "INSERT INTO diagnosis (appointment_id, patient_name, patient_age, gender, date, diagnosis, prescription) VALUES (:aptId, :name, :age, :gender, :date, :diag, :pres)";
         try (Connection con = Database.getSql2o().open()) {
@@ -34,7 +30,6 @@ public class DiagnosisRepository {
         } catch (Exception e) { return null; }
     }
     
-    // --- PERBAIKAN METODE HAPUS (JALUR DIAGNOSIS) ---
     public boolean deleteFromDiagnosis(int id) {
         String sql = "DELETE FROM diagnosis WHERE id = :id";
         try (Connection con = Database.getSql2o().open()) {
@@ -43,7 +38,6 @@ public class DiagnosisRepository {
             
             System.out.println(">> SQL DELETE DIAGNOSIS: ID " + id + " | Baris terhapus: " + deletedRows);
             
-            // Hanya return TRUE jika ada baris yang terhapus
             return deletedRows > 0; 
         } catch (Exception e) { 
             e.printStackTrace(); 
@@ -51,9 +45,6 @@ public class DiagnosisRepository {
         }
     }
 
-    // ========================================================================
-    // JALUR 2: TABEL 'RIWAYAT'
-    // ========================================================================
 
     public boolean saveToRiwayat(DiagnosisDoctor diag) {
         String sql = "INSERT INTO riwayat (appointment_id, patient_name, patient_age, gender, date, diagnosis, prescription) VALUES (:aptId, :name, :age, :gender, :date, :diag, :pres)";
@@ -85,7 +76,6 @@ public class DiagnosisRepository {
         } catch (Exception e) { return null; }
     }
 
-    // --- PERBAIKAN METODE HAPUS (JALUR RIWAYAT) ---
     public boolean deleteDiagnosis(int id) {
         String sql = "DELETE FROM riwayat WHERE id = :id";
         try (Connection con = Database.getSql2o().open()) {

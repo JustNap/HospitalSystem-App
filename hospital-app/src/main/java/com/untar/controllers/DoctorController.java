@@ -15,14 +15,12 @@ public class DoctorController {
 
     public static void registerRoutes() {
         
-        // 1. MENU UTAMA
         Spark.get("/doctor/menu", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             model.put("doctorName", doctorName);
             return new ThymeleafTemplateEngine().render(new ModelAndView(model, "doctor_menu"));
         });
 
-        // 2. JADWAL DOKTER
         Spark.get("/doctor/jadwal", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             model.put("doctorName", doctorName);
@@ -30,7 +28,6 @@ public class DoctorController {
             return new ThymeleafTemplateEngine().render(new ModelAndView(model, "doctor_page_jadwal"));
         });
 
-        // 3a. FORM DIAGNOSA (DARI JADWAL)
         Spark.get("/doctor/diagnosa", (req, res) -> {
             String idStr = req.queryParams("id");
             DoctorAppointment apt;
@@ -61,7 +58,6 @@ public class DoctorController {
             return new ThymeleafTemplateEngine().render(new ModelAndView(model, "doctor_page_diagnosa"));
         });
 
-        // 3b. FORM DIAGNOSA MANUAL (UNTUK LAPORAN)
         Spark.get("/doctor/diagnosa-manual", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             model.put("doctorName", doctorName);
@@ -76,11 +72,9 @@ public class DoctorController {
             model.put("pageTitle", "Input Laporan Baru (Table Riwayat)");
             model.put("historyList", service.getManualDiagnosis());
 
-            // Render file HTML khusus manual (doctor_form_lapor.html)
             return new ThymeleafTemplateEngine().render(new ModelAndView(model, "doctor_form_lapor"));
         });
 
-        // 4. SUBMIT DATA
         Spark.post("/doctor/submit-diagnosis", (req, res) -> {
             handleSave(req, "diagnosis");
             res.redirect("/doctor/diagnosa?success=true&id=" + req.queryParams("appointmentId"));
@@ -93,7 +87,6 @@ public class DoctorController {
             return null;
         });
 
-        // 5. HALAMAN LAPOR (Tabel Riwayat Utama)
         Spark.get("/doctor/lapor", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             model.put("doctorName", doctorName);
@@ -101,9 +94,6 @@ public class DoctorController {
             return new ThymeleafTemplateEngine().render(new ModelAndView(model, "doctor_page_lapor"));
         });
         
-        // ========================================================================
-        // 6. ROUTE HAPUS 1: DARI TABEL RIWAYAT (Untuk Form Manual)
-        // ========================================================================
         Spark.post("/doctor/delete-diagnosis", (req, res) -> {
              String idStr = req.queryParams("id");
              
@@ -113,14 +103,9 @@ public class DoctorController {
                  service.deleteDiagnosis(Integer.parseInt(idStr));
              }
              
-             // Redirect pintar: Tetap di halaman manual
              res.redirect("/doctor/diagnosa-manual");
              return null;
         });
-
-        // ========================================================================
-        // 7. ROUTE HAPUS 2: DARI TABEL DIAGNOSIS (Untuk Form Jadwal)
-        // ========================================================================
         Spark.post("/doctor/delete-from-diagnosis", (req, res) -> {
              String idStr = req.queryParams("id");
              String aptId = req.queryParams("appointmentId");
@@ -139,17 +124,12 @@ public class DoctorController {
              return null;
         });
 
-        // ========================================================================
-        // 8. ROUTE HAPUS 3: KHUSUS HALAMAN UTAMA LAPOR (TAMBAHAN)
-        // ========================================================================
-        // Route ini khusus menangani tombol hapus di halaman doctor_page_lapor.html
         Spark.post("/doctor/delete-diagnosis-main", (req, res) -> {
              String idStr = req.queryParams("id");
              
              System.out.println("[DEBUG] Delete dari Menu Lapor ID: " + idStr); // Debugging
              
              if (idStr != null) {
-                 // Hapus dari tabel riwayat
                  service.deleteDiagnosis(Integer.parseInt(idStr));
              }
              res.redirect("/doctor/lapor");

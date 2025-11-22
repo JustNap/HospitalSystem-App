@@ -10,14 +10,12 @@ public class Database {
             System.out.println("Menginisialisasi koneksi Database...");
             DatabaseConfig config = new DatabaseConfig();
             
-            // Membuat object Sql2o
             sql2o = new Sql2o(config.getUrl(), config.getUser(), config.getPassword());
             
             System.out.println("Database berhasil dikonfigurasi!");
         } catch (Exception e) {
             System.err.println("GAGAL KONEKSI KE DATABASE!");
             e.printStackTrace();
-            // RuntimeException agar aplikasi berhenti jika DB gagal
             throw new RuntimeException("Error initializing database", e);
         }
     }

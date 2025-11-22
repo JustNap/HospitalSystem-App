@@ -2,7 +2,6 @@ package com.untar.models;
 import java.sql.Date;
 
 public class DiagnosisDoctor {
-    // 1. Pastikan field ID ada
     private int id; 
     
     private int appointmentId;
@@ -13,7 +12,6 @@ public class DiagnosisDoctor {
     private String diagnosis;
     private String prescription;
 
-    // Constructor Kosong (Penting untuk Sql2o agar bisa mapping otomatis)
     public DiagnosisDoctor() {}
 
     // Constructor Lengkap (Untuk Simpan Data)
@@ -27,11 +25,6 @@ public class DiagnosisDoctor {
         this.prescription = prescription;
     }
 
-    // ==========================================
-    // GETTER & SETTER (WAJIB LENGKAP)
-    // ==========================================
-    
-    // INI YANG MENYEBABKAN ERROR SEBELUMNYA (GET ID)
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 

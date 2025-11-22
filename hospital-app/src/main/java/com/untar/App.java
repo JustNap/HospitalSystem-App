@@ -14,7 +14,6 @@ public class App {
             response.body("ERROR 500: " + exception.getMessage());
         });
 
-        // Registrasi semua endpoint ke Spark
         DoctorController.registerRoutes();
 
         System.out.println("SERVER BERJALAN -> http://localhost:4567/doctor/menu");

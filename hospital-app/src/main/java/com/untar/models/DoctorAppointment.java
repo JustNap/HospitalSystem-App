@@ -8,11 +8,8 @@ public class DoctorAppointment {
     private String complaint;
     private Timestamp createdAt;
 
-    // 1. Constructor Kosong (WAJIB ADA UNTUK ROUTE MANUAL)
-    // Tanpa ini, baris "new DoctorAppointment()" di Controller akan error/gagal.
     public DoctorAppointment() {}
 
-    // 2. Constructor Lengkap (Untuk Database)
     public DoctorAppointment(int id, String patientName, String time, String complaint, Timestamp createdAt) {
         this.id = id;
         this.patientName = patientName;
@@ -21,8 +18,6 @@ public class DoctorAppointment {
         this.createdAt = createdAt;
     }
 
-    // 3. GETTER & SETTER (WAJIB LENGKAP)
-    // Tanpa ini, HTML error "source is null"
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
