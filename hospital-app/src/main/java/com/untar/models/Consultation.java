@@ -1,58 +1,32 @@
 package com.untar.models;
 
 public class Consultation {
+    
     private int id;
-    private String consultation_date;
+    private int appointment_id;
+    private String patient_name;
+    private String date; 
     private String diagnosis;
-    private String notes;
-    private String doctorName;
-    private String patientName;
+    private String perception;
+    private String create_at; 
 
-    public Consultation(){
-    }
+    public Consultation() {} 
+    
+    // Getters
+    public int getId() { return id; }
+    public int getAppointment_id() { return appointment_id; }
+    public String getPatient_name() { return patient_name; }
+    public String getDate() { return date; }
+    public String getDiagnosis() { return diagnosis; }
+    public String getPerception() { return perception; } 
+    public String getCreate_at() { return create_at; }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getConsultation_date(){
-        return consultation_date;
-    }
-
-    public String getDiagnosis(){
-        return diagnosis;
-    }
-    public String getNotes(){
-        return notes;
-    }
-    public String getDoctorName(){
-        return doctorName;
-    }
-    public String getPatientName() {
-        return patientName;
-    }
-
-    public void setId(int id){
-        this.id = id;
-    }
-
-    public void setConsultation_date(String consultation_date){
-        this.consultation_date = consultation_date;
-    }
-
-    public void setDiagnosis(String diagnosis){
-        this.diagnosis = diagnosis;
-    }
-
-    public void setNotes(String notes){
-        this.notes = notes;
-    }
-
-    public void setDoctorName(String doctorName){
-        this.doctorName = doctorName;
-    }
-
-    public void setPatientName(String patientName){
-        this.patientName = patientName;
-    }
+    // Setters (Opsional)
+    public void setId(int id) { this.id = id; }
+    public void setAppointment_id(int appointment_id) { this.appointment_id = appointment_id; }
+    public void setPatient_name(String patient_name) { this.patient_name = patient_name; }
+    public void setDate(String date) { this.date = date; }
+    public void setDiagnosis(String diagnosis) { this.diagnosis = diagnosis; }
+    public void setPerception(String perception) { this.perception = perception; }
+    public void setCreate_at(String create_at) { this.create_at = create_at; }
 }

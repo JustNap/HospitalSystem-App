@@ -145,7 +145,6 @@ public class AdminController {
                     }
                 }
 
-                // 2. Buat Tabel Jadwal
                 StringBuilder rows = new StringBuilder();
                 if (schedules != null) {
                     for (AppointmentSchedule s : schedules) {
@@ -175,7 +174,6 @@ public class AdminController {
             }
         });
 
-        // ACTION: CREATE SCHEDULE
         post("/admin/appointment-doctors/create", (req, res) -> {
             int doctorId = Integer.parseInt(req.queryParams("id_doctor"));
             String tanggal = req.queryParams("tanggal");
@@ -188,7 +186,7 @@ public class AdminController {
             return null;
         });
 
-        // ACTION: DELETE SCHEDULE
+
         post("/admin/schedule/delete", (req, res) -> {
             int id = Integer.parseInt(req.queryParams("id"));
             AppointmentScheduleRepository.delete(id);
@@ -196,46 +194,36 @@ public class AdminController {
             return null;
         });
 
-        // =============================================================
-        // 6. CONSULTATION REPORT (Appointment Details)
-        // URL: http://localhost:4567/admin/consultations
-        // =============================================================
         get("/admin/consultations", (req, res) -> {
-            System.out.println("LOG: Mengakses Consultation Report");
-            
+            System.out.println("LOG: Mengakses Consultation Report (Riwayat)");
+
             try {
                 List<Consultation> consultations = consultationService.getAllConsultations();
                 StringBuilder rows = new StringBuilder();
 
-                if (consultations != null) {
+                if (consultations != null && !consultations.isEmpty()) {
                     for (Consultation c : consultations) {
                         rows.append("<tr>")
-                                .append("<td>").append(c.getConsultation_date()).append("</td>")
-                                .append("<td>").append(c.getDoctorName()).append("</td>")
-                                .append("<td>").append(c.getPatientName()).append("</td>")
+                                .append("<td>").append(c.getDate()).append("</td>") 
+                                .append("<td>").append(c.getPatient_name()).append("</td>") 
                                 .append("<td>").append(c.getDiagnosis()).append("</td>")
-                                // Handle Null Notes agar tidak error/jelek
-                                .append("<td>").append(c.getNotes() == null ? "-" : c.getNotes()).append("</td>")
+                                .append("<td>").append(c.getPerception() == null ? "-" : c.getPerception()).append("</td>")
                                 .append("</tr>");
                     }
                 } else {
-                    rows.append("<tr><td colspan='5'>Belum ada data konsultasi</td></tr>");
+                    rows.append("<tr><td colspan='4'>Belum ada data konsultasi</td></tr>"); 
                 }
 
-                // Menggunakan template baru admin-consultations.html (BUKAN yang ada #foreach)
                 return renderHTML("/templates/admin/admin-consultations.html")
                         .replace("{{consultRows}}", rows.toString());
 
             } catch (Exception e) {
-                e.printStackTrace(); // Cek Terminal jika 500
-                return "Error 500 di Consultation: " + e.getMessage();
+                e.printStackTrace();
+                return "Error 500 di Consultation (Riwayat): " + e.getMessage();
             }
         });
     }
 
-    // =============================================================
-    // UTILITY: LOAD HTML FILE
-    // =============================================================
     private static String renderHTML(String path) {
         try (InputStream input = AdminController.class.getResourceAsStream(path)) {
             if (input == null) {
