@@ -28,35 +28,53 @@ public class DoctorController {
             return new ThymeleafTemplateEngine().render(new ModelAndView(model, "doctor_page_jadwal"));
         });
 
-        Spark.get("/doctor/diagnosa", (req, res) -> {
-            String idStr = req.queryParams("id");
-            DoctorAppointment apt;
+Spark.get("/doctor/diagnosa", (req, res) -> {
+    try {
+        // --- LOGGING ---
+        System.out.println("1. Masuk Route Diagnosa");
+        
+        String idStr = req.queryParams("id");
+        DoctorAppointment apt;
 
-            if (idStr != null) {
-                int id = Integer.parseInt(idStr);
-                apt = service.getAppointmentById(id);
-                if (apt == null) return "Data Pasien Tidak Ditemukan.";
-            } else {
-                apt = new DoctorAppointment();
-                apt.setId(-1); 
-                apt.setPatientName("Belum Pilih Pasien");
-            }
-
-            Map<String, Object> model = new HashMap<>();
-            model.put("doctorName", doctorName);
-            model.put("appointment", apt);
-            model.put("showSuccess", "true".equals(req.queryParams("success")));
-            model.put("formAction", "/doctor/submit-diagnosis"); 
+        if (idStr != null) {
+            int id = Integer.parseInt(idStr);
+            System.out.println("2. Mencari ID: " + id);
             
-            if (apt.getId() == -1) {
-                model.put("pageTitle", "Silakan Pilih Pasien dari Jadwal");
-            } else {
-                model.put("pageTitle", "Formulir Diagnosa: " + apt.getPatientName());
-            }
+            apt = service.getAppointmentById(id); // <--- Rawan Error
+            
+            System.out.println("3. Hasil DB: " + (apt == null ? "NULL" : apt.getPatient_name()));
+            
+            if (apt == null) return "Data Pasien Tidak Ditemukan.";
+        } else {
+            apt = new DoctorAppointment();
+            apt.setId(-1); 
+            apt.setPatient_name("Belum Pilih Pasien");
+        }
 
-            model.put("historyList", service.getListDiagnosis()); 
-            return new ThymeleafTemplateEngine().render(new ModelAndView(model, "doctor_page_diagnosa"));
-        });
+        Map<String, Object> model = new HashMap<>();
+        model.put("doctorName", doctorName);
+        model.put("appointment", apt);
+        model.put("showSuccess", "true".equals(req.queryParams("success")));
+        model.put("formAction", "/doctor/submit-diagnosis"); 
+        
+        if (apt.getId() == -1) {
+            model.put("pageTitle", "Silakan Pilih Pasien dari Jadwal");
+        } else {
+            model.put("pageTitle", "Formulir Diagnosa: " + apt.getPatient_name());
+        }
+
+        System.out.println("4. Mengambil History List...");
+        List<?> history = service.getListDiagnosis(); 
+        model.put("historyList", history); 
+
+        System.out.println("5. Rendering Template...");
+        return new ThymeleafTemplateEngine().render(new ModelAndView(model, "doctor_page_diagnosa"));
+        
+    } catch (Exception e) {
+        e.printStackTrace(); 
+        return "Terjadi Error di Server: " + e.getMessage();
+    }
+});
 
         Spark.get("/doctor/diagnosa-manual", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
@@ -64,7 +82,7 @@ public class DoctorController {
 
             DoctorAppointment dummy = new DoctorAppointment();
             dummy.setId(0); 
-            dummy.setPatientName(""); 
+            dummy.setPatient_name(""); 
             model.put("appointment", dummy);
             
             model.put("showSuccess", "true".equals(req.queryParams("success")));
