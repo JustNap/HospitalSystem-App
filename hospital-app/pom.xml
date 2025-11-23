@@ -45,17 +45,22 @@
         <scope>runtime</scope>
     </dependency>
 
-    <!-- Sql2o -->
     <dependency>
       <groupId>org.sql2o</groupId>
       <artifactId>sql2o</artifactId>
       <version>1.6.0</version>
     </dependency>
-      <!-- MySQL Connector -->
+
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.33</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.sparkjava</groupId>
+      <artifactId>spark-template-velocity</artifactId>
+      <version>2.7.1</version> 
     </dependency>
   </dependencies>
 

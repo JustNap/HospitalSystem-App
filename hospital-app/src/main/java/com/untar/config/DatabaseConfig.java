@@ -1,20 +1,32 @@
 package com.untar.config;
 
+import org.sql2o.Sql2o;
+import java.io.InputStream;
+import java.util.Properties;
+
 public class DatabaseConfig {
-    private String url = "jdbc:mysql://localhost:3306/db_hospital?serverTimezone=UTC";
-    private String user = "root";
-    private String password = "Ignatius@123"; 
 
-    // Constructor Kosong
-    public DatabaseConfig() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+    private static Sql2o sql2o;
+
+    public static Sql2o getSql2o() {
+        if (sql2o == null) {
+            try (InputStream input = DatabaseConfig.class
+                    .getClassLoader()
+                    .getResourceAsStream("application.properties")) {
+
+                Properties props = new Properties();
+                props.load(input);
+
+                sql2o = new Sql2o(
+                        props.getProperty("db.url"),
+                        props.getProperty("db.user"),
+                        props.getProperty("db.password")
+                );
+
+            } catch (Exception e) {
+                throw new RuntimeException("⚠ Gagal load konfigurasi database: " + e.getMessage());
+            }
         }
+        return sql2o;
     }
-
-    public String getUrl() { return url; }
-    public String getUser() { return user; }
-    public String getPassword() { return password; }
 }

@@ -1,21 +1,19 @@
 package com.untar;
 
+import com.untar.controllers.AdminController;
 import com.untar.controllers.DoctorController;
-import static spark.Spark.*;
 
-public class App {
-    public static void main(String[] args) {
+import static spark.Spark.port;
+import static spark.Spark.staticFiles;
 
+public class App
+{
+    public static void main( String[] args )
+    {
         port(4567);
         staticFiles.location("/public");
-
-        exception(Exception.class, (exception, request, response) -> {
-            exception.printStackTrace();
-            response.body("ERROR 500: " + exception.getMessage());
-        });
-
+        AdminController.init();
         DoctorController.registerRoutes();
-
-        System.out.println("SERVER BERJALAN -> http://localhost:4567/doctor/menu");
+        System.out.println("Server berjalan di http://localhost:4567/admin/dashboard");
     }
 }
