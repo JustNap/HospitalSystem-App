@@ -14,7 +14,6 @@ public class DiagnosisDoctor {
 
     public DiagnosisDoctor() {}
 
-    // Constructor Lengkap (Untuk Simpan Data)
     public DiagnosisDoctor(int appointmentId, String patientName, int patientAge, String gender, Date date, String diagnosis, String prescription) {
         this.appointmentId = appointmentId;
         this.patientName = patientName;

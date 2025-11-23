@@ -33,7 +33,6 @@ public class DiagnosisRepository {
     public boolean deleteFromDiagnosis(int id) {
         String sql = "DELETE FROM diagnosis WHERE id = :id";
         try (Connection con = Database.getSql2o().open()) {
-            // getResult() mengembalikan jumlah baris yang dihapus
             int deletedRows = con.createQuery(sql).addParameter("id", id).executeUpdate().getResult();
             
             System.out.println(">> SQL DELETE DIAGNOSIS: ID " + id + " | Baris terhapus: " + deletedRows);
