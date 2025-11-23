@@ -22,10 +22,10 @@ public class ConsultationRepository {
             "  c.consultation_date, " +
             "  c.diagnosis, " +
             "  c.notes, " +
-            "  d.name AS doctorName, " +
-            "  CAST(c.patient_id AS CHAR) AS patientName " +
+            "  d.nama AS doctorName, " +
+            "  CAST(c.patient_id AS CHAR) AS patientName " + 
             "FROM consultations c " +
-            "LEFT JOIN doctors d ON c.doctor_id = d.id";
+            "LEFT JOIN login_dokter d ON c.doctor_id = d.id"; 
 
         try (Connection con = sql2o.open()) {
             return con.createQuery(sql)

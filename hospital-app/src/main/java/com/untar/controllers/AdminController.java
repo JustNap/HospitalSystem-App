@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.untar.services.ConsultationService;
-import com.untar.services.DoctorService;
+import com.untar.services.ManageDoctorService;
 
 import spark.ModelAndView;
 import static spark.Spark.get;
@@ -13,7 +13,7 @@ import spark.template.velocity.VelocityTemplateEngine;
 
 public class AdminController {
 
-    private DoctorService doctorService = new DoctorService();
+    private ManageDoctorService doctorService = new ManageDoctorService();
     private ConsultationService consultationService = new ConsultationService();
     private VelocityTemplateEngine engine = new VelocityTemplateEngine();
 
