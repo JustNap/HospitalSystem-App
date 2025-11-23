@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hasil Diagnosa</title>
+    <link rel="stylesheet" href="/css/patient.css">
+
+    <style>
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #007bff;
+            color: white;
+            text-align: left;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+        }
+
+        .navbar h2 {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <h2>Hospital Information System</h2>
+    <a href="/logout" class="logout-btn">Logout</a>
+</div>
+
+<div class="container">
+    <h1>Riwayat Diagnosa</h1>
+
+    {{#diagnosis}}
+    <table>
+        <tr>
+            <th>Nama Pasien</th>
+            <td>{{patient_name}}</td>
+        </tr>
+        <tr>
+            <th>Tanggal Pemeriksaan</th>
+            <td>{{examination_date}}</td>
+        </tr>
+        <tr>
+            <th>Diagnosis</th>
+            <td>{{diagnosis}}</td>
+        </tr>
+        <tr>
+            <th>Resep Obat</th>
+            <td>{{prescription}}</td>
+        </tr>
+        <tr>
+            <th>Dibuat Pada</th>
+            <td>{{created_at}}</td>
+        </tr>
+    </table>
+    {{/diagnosis}}
+
+    {{^diagnosis}}
+    <p class="no-data">Belum ada hasil diagnosa.</p>
+    {{/diagnosis}}
+</div>
+
+</body>
+</html>

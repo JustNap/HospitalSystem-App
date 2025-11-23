@@ -2,38 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>History Appointment</title>
+    <title>Riwayat Konsultasi</title>
     <link rel="stylesheet" href="/css/patient.css">
 </head>
 
 <body>
+
 <div class="navbar">
     <h2>Hospital Information System</h2>
     <a href="/logout" class="logout-btn">Logout</a>
 </div>
 
 <div class="container">
-    <h1>Riwayat Appointment</h1>
+    <h1>Riwayat Konsultasi Anda</h1>
 
-    <table class="table">
-        <tr>
-            <th>Dokter</th>
-            <th>Tanggal</th>
-            <th>Jam</th>
-            <th>Status</th>
-            <th>Detail</th>
-        </tr>
+    {{#appointments}}
+    <div class="history-card">
+        <h3>{{dokter}}</h3>
+        <p><strong>Spesialis:</strong> {{spesialis}}</p>
+        <p><strong>Tanggal:</strong> {{tanggal}}</p>
+        <p><strong>Waktu:</strong> {{waktu}}</p>
+    </div>
+    {{/appointments}}
 
-        {{#appointments}}
-        <tr>
-            <td>{{nama_dokter}}</td>
-            <td>{{date}}</td>
-            <td>{{time}}</td>
-            <td>{{status}}</td>
-            <td><a href="/patient/diagnosis/{{id}}" class="btn-small">Lihat</a></td>
-        </tr>
-        {{/appointments}}
-    </table>
+    {{^appointments}}
+    <p class="no-history">Belum ada riwayat konsultasi.</p>
+    {{/appointments}}
 </div>
 
 </body>

@@ -4,45 +4,17 @@ public class Doctor {
     private int id;
     private String nama;
     private String spesialis;
-    private int nomorHP;
+    private String nomor_hp;
 
-    public Doctor(int id, String nama, String spesialis, int nomorHP) {
+    public Doctor(int id, String nama, String spesialis, String nomor_hp) {
         this.id = id;
         this.nama = nama;
         this.spesialis = spesialis;
-        this.nomorHP = nomorHP;
+        this.nomor_hp = nomor_hp;
     }
 
-    // Getter & Setter
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNama() {
-        return nama;
-    }
-
-    public void setNama(String nama) {
-        this.nama = nama;
-    }
-
-    public String getSpesialis() {
-        return spesialis;
-    }
-
-    public void setSpesialis(String spesialis) {
-        this.spesialis = spesialis;
-    }
-
-    public int getNomorHP() {
-        return nomorHP;
-    }
-
-    public void setNomorHP(int nomorHP) {
-        this.nomorHP = nomorHP;
-    }
+    public int getId() { return id; }
+    public String getNama() { return nama; }
+    public String getSpesialis() { return spesialis; }
+    public String getNomor_hp() { return nomor_hp; }
 }
