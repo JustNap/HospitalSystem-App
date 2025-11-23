@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.sql2o.Sql2o;
 
-import com.untar.config.Database;
+import com.untar.config.DatabaseConfig;
 import com.untar.models.ManageDoctor;
 import com.untar.repository.ManageDoctorRepository;
 
@@ -14,7 +14,7 @@ public class ManageDoctorService {
     private Sql2o sql2o;
 
     public ManageDoctorService() {
-        this.sql2o = Database.getSql2o();
+        this.sql2o = DatabaseConfig.getSql2o();
         this.doctorRepository = new ManageDoctorRepository(this.sql2o);
     }
 
@@ -22,10 +22,10 @@ public class ManageDoctorService {
         return doctorRepository.findAll();
     }
 
-    public void addDoctor(String name, String speciality) {
+    public void addDoctor(String name, String speciality, String phone) {
         if (name == null || name.isEmpty()) return;
         ManageDoctor newDoctor = new ManageDoctor(name, speciality);
-
+        newDoctor.setPhoneNumber(phone);
         doctorRepository.save(newDoctor);
     }
 
