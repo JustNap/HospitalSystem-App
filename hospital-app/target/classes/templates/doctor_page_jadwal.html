@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Jadwal Pasien</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/dokter.css">
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-primary mb-4">
+    <div class="container">
+        <span class="navbar-brand">Hospital App - Jadwal</span>
+        <span class="text-white" th:text="'Halo, ' + ${doctorName}"></span>
+    </div>
+</nav>
+
+<div class="container">
+    <a href="/doctor/menu" class="btn btn-outline-secondary mb-3">← Kembali ke Menu</a>
+    
+    <div class="card mb-3 shadow-sm">
+        <div class="card-header bg-primary text-white">
+            📅 Daftar Pasien Menunggu (Hari Ini)
+        </div>
+        <div class="card-body">
+            <table class="table table-hover table-striped align-middle">
+                <thead class="table-light">
+                <tr>
+                    <th>Jam</th>
+                    <th>Nama Pasien</th>
+                    <th>Keluhan</th>
+                    <th class="text-center" style="width: 150px;">Aksi</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="apt : ${appointments}">
+                    <td th:text="${apt.time}"></td>
+                    <td th:text="${apt.patientName}"></td>
+                    <td th:text="${apt.complaint}"></td>
+                    
+                    <td class="text-center">
+                        <a th:href="'/doctor/diagnosa?id=' + ${apt.id}" class="btn btn-success btn-sm">
+                            🩺 Periksa
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr th:if="${#lists.isEmpty(appointments)}">
+                    <td colspan="4" class="text-center text-muted p-4">
+                        <em>Tidak ada jadwal pasien hari ini.</em>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
