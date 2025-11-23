@@ -17,11 +17,10 @@ public class ManageDoctorRepository {
 
     public List<ManageDoctor> findAll() {
         String sql = "SELECT id, " +
-                    "nama AS name, " +
-                    "spesialis AS speciality, " +
-                    "nomor_hp AS phoneNumber, " +
-                    "password " +
-                    "FROM login_dokter";
+                     "nama AS name, " +
+                     "spesialis AS speciality, " +
+                     "nomor_hp AS phoneNumber " +
+                     "FROM login_dokter";
 
         try (Connection con = sql2o.open()) {
             return con.createQuery(sql).executeAndFetch(ManageDoctor.class);
@@ -29,9 +28,8 @@ public class ManageDoctorRepository {
     }
 
     public void save(ManageDoctor doctor) {
-
-        String sql = "INSERT INTO login_dokter (nama, spesialis, nomor_hp, password) " +
-                    "VALUES (:name, :speciality, :phoneNumber, :password)";
+        String sql = "INSERT INTO login_dokter (nama, spesialis, nomor_hp) " +
+                    "VALUES (:name, :speciality, :phoneNumber)";
 
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
@@ -51,7 +49,7 @@ public class ManageDoctorRepository {
 
     public ManageDoctor login(int id, String name) {
         String sql = "SELECT id, nama AS name, spesialis AS speciality, " +
-                    "nomor_hp AS phoneNumber, password " + 
+                    "nomor_hp AS phoneNumber " +
                     "FROM login_dokter WHERE id = :id AND nama = :name";
         try (Connection con = sql2o.open()) {
             return con.createQuery(sql)

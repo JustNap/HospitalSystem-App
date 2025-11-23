@@ -5,7 +5,6 @@ public class ManageDoctor {
     private String name;
     private String speciality;
     private String phoneNumber;
-    private String password;
 
     public ManageDoctor(){
     }
@@ -14,7 +13,6 @@ public class ManageDoctor {
         this.name = name;
         this.speciality = speciality;
         this.phoneNumber = "-";
-        this.password = "1234";
     }
 
     public int getId(){
@@ -33,10 +31,6 @@ public class ManageDoctor {
         return phoneNumber;
     }
 
-    public String getPassword(){
-        return password;
-    }
-
     public void setId(int id){
         this.id = id;
     }
@@ -50,9 +44,5 @@ public class ManageDoctor {
 
     public void setPhoneNumber(String phoneNumber){
         this.phoneNumber = phoneNumber;
-    }
-
-    public void setPassword(String password){
-        this.password = password;
     }
 }
