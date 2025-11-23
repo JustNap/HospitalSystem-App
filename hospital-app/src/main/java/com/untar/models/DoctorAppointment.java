@@ -3,26 +3,26 @@ import java.sql.Timestamp;
 
 public class DoctorAppointment {
     private int id;
-    private String patientName;
+    private String patient_name;
     private String time;
     private String complaint;
-    private Timestamp createdAt;
+    private Timestamp created_at;
 
     public DoctorAppointment() {}
 
-    public DoctorAppointment(int id, String patientName, String time, String complaint, Timestamp createdAt) {
+    public DoctorAppointment(int id, String patient_name, String time, String complaint, Timestamp created_at) {
         this.id = id;
-        this.patientName = patientName;
+        this.patient_name = patient_name;
         this.time = time;
         this.complaint = complaint;
-        this.createdAt = createdAt;
+        this.created_at = created_at;
     }
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
-    public String getPatientName() { return patientName; }
-    public void setPatientName(String patientName) { this.patientName = patientName; }
+    public String getPatient_name() { return patient_name; }
+    public void setPatient_name(String patient_name) { this.patient_name = patient_name; }
 
     public String getTime() { return time; }
     public void setTime(String time) { this.time = time; }
@@ -30,6 +30,6 @@ public class DoctorAppointment {
     public String getComplaint() { return complaint; }
     public void setComplaint(String complaint) { this.complaint = complaint; }
 
-    public Timestamp getCreatedAt() { return createdAt; }
-    public void setCreatedAt(Timestamp createdAt) { this.createdAt = createdAt; }
+    public Timestamp getCreated_at() { return created_at; }
+    public void setCreated_at(Timestamp created_at) { this.created_at = created_at; }
 }
