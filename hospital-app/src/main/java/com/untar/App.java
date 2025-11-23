@@ -1,13 +1,17 @@
 package com.untar;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+import static spark.Spark.*;
+import com.untar.controllers.AdminController;
+
+public class App {
+    public static void main(String[] args) {
+
+        port(4567);
+
+        staticFiles.location("/public");
+
+        AdminController.init();
+
+        System.out.println("Server berjalan di http://localhost:4567/admin/dashboard");
     }
 }

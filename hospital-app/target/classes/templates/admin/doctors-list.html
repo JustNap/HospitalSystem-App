@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor List - Hospital Information System</title>
+    <link rel="stylesheet" href="/css/admin.css"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="header">
+    <div class="logo">👤 Global Hospital</div> 
+    <a href="/logout" class="logout">🔒 Logout</a> 
+</header>
+
+<div class="container">
+    <aside class="sidebar">
+        <ul>
+            <li><a href="/admin/dashboard">Dashboard</a></li>
+            <li class="active"><a href="/admin/doctors-list">Doctor List</a></li> 
+            <li><a href="/admin/patients-list">Patient List</a></li>
+            <li><a href="/admin/appointment-doctors">Manage Appointment Doctor</a></li>
+            <li><a href="/admin/appointments">Appointment Details</a></li>
+            <li><a href="/admin/add-doctor">Add Doctor</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <h2>WELCOME ADMIN</h2>
+        
+        <div class="search-bar-container">
+            <input type="email" placeholder="Enter Email ID" class="search-input">
+            <button class="search-button">Search</button>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Doctor Name</th>
+                        <th>Specialist</th>
+                        <th>Contact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{doctorsRows}}
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+
+</body>
+</html>
