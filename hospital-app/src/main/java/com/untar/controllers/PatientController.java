@@ -73,9 +73,13 @@ public class PatientController {
 
         get("/patient/diagnosis", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
-            model.put("diagnosis", PatientDAO.getDiagnosisByPatientId(1));
+
+            int pasienId = 1; // nanti diganti session
+            model.put("diagnosis", PatientDAO.getDiagnosisByPatientId(pasienId));
+
             return render(model, "patient_diagnosis.html");
         });
+
 
     }
 
