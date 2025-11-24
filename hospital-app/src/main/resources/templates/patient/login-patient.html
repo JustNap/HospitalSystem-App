@@ -1,24 +1,206 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Patient Login</title>
-    <link rel="stylesheet" href="/css/LoginPatient.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Pasien - Hospital System</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #6a00ff, #3b00d6, #00b4ff);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 420px;
+            padding: 40px;
+            border-radius: 40px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+        }
+
+        .login-header {
+            margin-bottom: 30px;
+        }
+
+        .login-header h2 {
+            color: #333;
+            font-weight: 600;
+            font-size: 26px;
+            margin-bottom: 5px;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .icon-pasien {
+            font-size: 45px;
+            color: #00bfff;
+            margin-bottom: 15px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            font-size: 13px;
+            color: #555;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.2s ease;
+            outline: none;
+            background-color: #fcfcfc;
+        }
+
+        .input-wrapper input:focus {
+            border-color: #00bfff;
+            box-shadow: 0 0 5px rgba(0, 191, 255, 0.4);
+            background-color: #fff;
+        }
+
+        .input-wrapper input:focus + i {
+            color: #00bfff;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 12px 0;
+            background: #00bfff;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            background: #0095cc;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 191, 255, 0.3);
+        }
+
+        .btn-login:active {
+            transform: scale(0.98);
+        }
+
+        .error-message {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            border: 1px solid #ffcdd2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .footer-text {
+            margin-top: 25px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .footer-text a {
+            color: #00bfff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>Patient Login</h2>
+<div class="login-card">
+
+    <div class="login-header">
+        <i class="fas fa-hospital-user icon-pasien"></i>
+        <h2>Portal Pasien</h2>
+        <p>Silakan login untuk mengakses layanan kesehatan</p>
+    </div>
+
+    <div th:if="${loginError}" class="error-message">
+        <i class="fas fa-exclamation-circle"></i>
+        <span>Email atau password salah!</span>
+    </div>
 
     <form action="/patient/login" method="post">
-        <input type="email" name="email" placeholder="Your Email" required>
 
-        <input type="password" name="password" placeholder="Password" required>
+        <div class="input-group">
+            <label>Email</label>
+            <div class="input-wrapper">
+                <input type="email" name="email" placeholder="Masukkan email" required autocomplete="off">
+                <i class="fas fa-envelope"></i>
+            </div>
+        </div>
 
-        <button type="submit">Login</button>
+        <div class="input-group">
+            <label>Password</label>
+            <div class="input-wrapper">
+                <input type="password" name="password" placeholder="Masukkan password" required>
+                <i class="fas fa-lock"></i>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-login">LOGIN SEKARANG</button>
     </form>
 
-    <p>No account? <a href="/patient/register">Register</a></p>
+    <div class="footer-text">
+        Belum punya akun? <a href="/patient/register">Daftar sekarang</a>
+    </div>
 </div>
 
 </body>

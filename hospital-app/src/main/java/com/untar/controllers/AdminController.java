@@ -64,7 +64,6 @@ public class AdminController {
                                 .append("<td>").append(p.getNama()).append("</td>")
                                 .append("<td>").append(p.getEmail()).append("</td>")
                                 .append("<td>").append(p.getNomor_hp()).append("</td>")
-                                .append("<td>").append(p.getPassword() == null ? "-" : p.getPassword()).append("</td>")
                                 .append("</tr>");
                     }
                 }
