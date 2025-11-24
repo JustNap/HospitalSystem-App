@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hasil Diagnosa</title>
+    <link rel="stylesheet" href="/css/patient.css">
+
+    <style>
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Tambahan sedikit bayangan agar cantik */
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #007bff;
+            color: white;
+            text-align: left;
+            width: 30%; /* Agar lebar kolom label konsisten */
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+        }
+
+        .navbar h2 {
+            color: white;
+            margin: 0;
+            padding: 10px 20px;
+        }
+        
+        /* Tambahan agar navbar rapi */
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logout-btn {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <h2>Hospital Information System</h2>
+    <a href="/logout" class="logout-btn">Logout</a>
+</div>
+
+<div class="container">
+    <h1 style="text-align: center; margin-top: 20px;">Riwayat Diagnosa</h1>
+
+    {{#diagnosis}}
+    <table>
+        <tr>
+            <th>Nama Pasien</th>
+            <td>{{patientName}}</td> 
+        </tr>
+        <tr>
+            <th>Umur Pasien</th>
+            <td>{{patientAge}} Tahun</td>
+        </tr>
+        <tr>
+            <th>Jenis Kelamin</th>
+            <td>{{gender}}</td>
+        </tr>
+        <tr>
+            <th>Tanggal Pemeriksaan</th>
+            <td>{{date}}</td> 
+        </tr>
+        <tr>
+            <th>Diagnosis</th>
+            <td>{{diagnosis}}</td>
+        </tr>
+        <tr>
+            <th>Resep Obat</th>
+            <td>{{prescription}}</td>
+        </tr>
+    </table>
+    <br> {{/diagnosis}}
+
+    {{^diagnosis}}
+    <p class="no-data">Belum ada hasil diagnosa untuk saat ini.</p>
+    {{/diagnosis}}
+</div>
+
+</body>
+</html>

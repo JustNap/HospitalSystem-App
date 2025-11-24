@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Request Konsultasi</title>
+    <link rel="stylesheet" href="/css/patient.css">
+
+    <style>
+        .form-box {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 500px;
+        }
+
+        select, input {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #aaa;
+        }
+
+        .submit-btn {
+            padding: 12px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+<div class="navbar">
+    <h2>Hospital Information System</h2>
+    <a href="/logout" class="logout-btn">Logout</a>
+</div>
+
+<div class="container">
+    <h1>Request Konsultasi Dokter</h1>
+
+    <form action="/patient/request/submit" method="post" class="form-box">
+
+        <!-- PILIH DOKTER -->
+        <label for="doctor">Pilih Dokter</label>
+        <select name="doctor_id" id="doctor" required>
+            <option value="">-- Pilih Dokter --</option>
+
+            {{#dokter}}
+            <option value="{{id}}">{{nama}} - {{spesialis}}</option>
+            {{/dokter}}
+        </select>
+
+
+        <!-- JADWAL DIISI OTOMATIS MELALUI AJAX -->
+        <label for="schedule">Pilih Jadwal</label>
+        <select name="schedule_id" id="schedule" required disabled>
+            <option value="">-- Pilih Jadwal --</option>
+        </select>
+
+        <button type="submit" class="submit-btn">Kirim Request</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById("doctor").addEventListener("change", function () {
+        const doctorId = this.value;
+        const scheduleSelect = document.getElementById("schedule");
+
+        scheduleSelect.innerHTML = "<option>Loading...</option>";
+        scheduleSelect.disabled = true;
+
+        if (!doctorId) return;
+
+        fetch("/patient/schedule/" + doctorId)
+            .then(res => res.json())
+            .then(data => {
+                scheduleSelect.innerHTML = "";
+
+                if (data.length === 0) {
+                    scheduleSelect.innerHTML = "<option>Tidak ada jadwal tersedia</option>";
+                    return;
+                }
+
+                data.forEach(s => {
+                    const option = document.createElement("option");
+                    option.value = s.id;
+                    option.textContent = `${s.tanggal} | ${s.waktu_mulai} - ${s.waktu_selesai} (Sisa: ${s.slot_sisa})`;
+                    scheduleSelect.appendChild(option);
+                });
+
+                scheduleSelect.disabled = false;
+            })
+            .catch(err => {
+                scheduleSelect.innerHTML = "<option>Error mengambil data</option>";
+                console.error(err);
+            });
+    });
+</script>
+
+</body>
+</html>

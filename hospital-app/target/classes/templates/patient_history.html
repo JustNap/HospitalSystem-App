@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Riwayat Konsultasi</title>
+    <link rel="stylesheet" href="/css/patient.css">
+</head>
+
+<body>
+
+<div class="navbar">
+    <h2>Hospital Information System</h2>
+    <a href="/logout" class="logout-btn">Logout</a>
+</div>
+
+<div class="container">
+    <h1>Riwayat Konsultasi Anda</h1>
+
+    {{#appointments}}
+    <div class="history-card">
+        <h3>{{dokter}}</h3>
+        <p><strong>Spesialis:</strong> {{spesialis}}</p>
+        <p><strong>Tanggal:</strong> {{tanggal}}</p>
+        <p><strong>Waktu:</strong> {{waktu}}</p>
+    </div>
+    {{/appointments}}
+
+    {{^appointments}}
+    <p class="no-history">Belum ada riwayat konsultasi.</p>
+    {{/appointments}}
+</div>
+
+</body>
+</html>

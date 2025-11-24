@@ -7,7 +7,7 @@ public class Consultation {
     private String patient_name;
     private String date; 
     private String diagnosis;
-    private String perception;
+    private String prescription;
     private String create_at; 
 
     public Consultation() {} 
@@ -18,7 +18,7 @@ public class Consultation {
     public String getPatient_name() { return patient_name; }
     public String getDate() { return date; }
     public String getDiagnosis() { return diagnosis; }
-    public String getPerception() { return perception; } 
+    public String getPrescription() { return prescription; } 
     public String getCreate_at() { return create_at; }
 
     // Setters (Opsional)
@@ -27,6 +27,6 @@ public class Consultation {
     public void setPatient_name(String patient_name) { this.patient_name = patient_name; }
     public void setDate(String date) { this.date = date; }
     public void setDiagnosis(String diagnosis) { this.diagnosis = diagnosis; }
-    public void setPerception(String perception) { this.perception = perception; }
+    public void setPrescription(String prescription) { this.prescription = prescription; }
     public void setCreate_at(String create_at) { this.create_at = create_at; }
 }

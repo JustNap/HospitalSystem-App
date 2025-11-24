@@ -26,7 +26,7 @@
       <scope>test</scope>
     </dependency>
 
-     <dependency>
+    <dependency>
         <groupId>com.sparkjava</groupId>
         <artifactId>spark-core</artifactId>
         <version>2.9.4</version>
@@ -45,6 +45,13 @@
         <scope>runtime</scope>
     </dependency>
 
+      <dependency>
+          <groupId>com.sparkjava</groupId>
+          <artifactId>spark-template-handlebars</artifactId>
+          <version>2.7.1</version>
+      </dependency>
+
+    <!-- Sql2o -->
     <dependency>
       <groupId>org.sql2o</groupId>
       <artifactId>sql2o</artifactId>
@@ -57,6 +64,11 @@
       <version>8.0.33</version>
     </dependency>
 
+      <dependency>
+          <groupId>com.google.code.gson</groupId>
+          <artifactId>gson</artifactId>
+          <version>2.10.1</version>
+      </dependency>
     <dependency>
       <groupId>com.sparkjava</groupId>
       <artifactId>spark-template-velocity</artifactId>
