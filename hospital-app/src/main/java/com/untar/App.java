@@ -54,6 +54,8 @@ public class App {
         System.out.println("✅ Server Berjalan!");
         System.out.println("👉 Cek Database: http://localhost:4567/test-db");
         System.out.println("👉 Login Pasien: http://localhost:4567/patient/login");
+        System.out.println("👉 Login Admin: http://localhost:4567/admin/login");
+        System.out.println("👉 Login Doctor: http://localhost:4567/doctor/login");
         System.out.println("==================================================");
     }
 }
