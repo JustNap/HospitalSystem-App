@@ -207,7 +207,7 @@ public class AdminController {
                                 .append("<td>").append(c.getDate()).append("</td>") 
                                 .append("<td>").append(c.getPatient_name()).append("</td>") 
                                 .append("<td>").append(c.getDiagnosis()).append("</td>")
-                                .append("<td>").append(c.getPerception() == null ? "-" : c.getPerception()).append("</td>")
+                                .append("<td>").append(c.getPrescription() == null ? "-" : c.getPrescription()).append("</td>")
                                 .append("</tr>");
                     }
                 } else {
