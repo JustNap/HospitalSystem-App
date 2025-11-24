@@ -10,7 +10,7 @@ public class UserRepository {
     // REGISTER
     public static boolean register(User user) {
         String sql = "INSERT INTO users (full_name, email, password, role) VALUES (:fullName, :email, :password, :role)";
-        try (Connection con = Database.sql2o.open()) {
+        try (Connection con = Database.getSql2o().open()) {
             con.createQuery(sql)
                 .addParameter("fullName", user.getFullName())
                 .addParameter("email", user.getEmail())
@@ -28,7 +28,7 @@ public class UserRepository {
     public static User login(String email, String password) {
         String sql = "SELECT * FROM users WHERE email=:email AND password=:password";
 
-        try (Connection con = Database.sql2o.open()) {
+        try (Connection con = Database.getSql2o().open()) {
             return con.createQuery(sql)
                      .addParameter("email", email)
                      .addParameter("password", password)
