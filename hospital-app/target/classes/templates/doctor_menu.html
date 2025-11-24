@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Menu Dokter</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/dokter.css"> 
+    <style>
+        .menu-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: black;
+        }
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-primary mb-4">
+    <div class="container">
+        <span class="navbar-brand">Hospital Dokter Panel</span>
+        <span class="text-white" th:text="'Halo, ' + ${doctorName}"></span>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="text-center mb-4">
+        <h2>Menu Utama Dokter</h2>
+        <p class="lead">Silakan pilih layanan yang ingin Anda akses.</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-4 mb-3">
+            <a href="/doctor/jadwal" class="menu-card d-block">
+                <div class="card card-body p-4 text-center">
+                    📅 <span class="ms-2">Jadwal Periksa Pasien</span>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4 mb-3">
+            <a href="/doctor/diagnosa" class="menu-card d-block">
+                <div class="card card-body p-4 text-center">
+                    📋 <span class="ms-2">Riwayat Diagnosa</span>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4 mb-3">
+            <a href="/doctor/lapor" class="menu-card d-block">
+                <div class="card card-body p-4 text-center">
+                    ✉️ <span class="ms-2">Laporan ke Admin</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
